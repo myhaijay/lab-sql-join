@@ -9,10 +9,11 @@ select s.first_name, s.last_name, a.address from staff as s
 join address as a on a.address_id = s.address_id;
 
 -- 3. Display the total amount rung up by each staff member in August of 2005.
-select p.staff_id, sum(amount) as amount from payment as p
-join rental as r on r.staff_id = p.staff_id
-where r.rental_date like "2005-08%" 
-group by p.staff_id;
+select first_name, last_name, sum(amount) as Amount_IN_Aug from payment as p
+join staff as s on s.staff_id = p.staff_id
+where p.payment_date like "2005-08%" 
+group by s.staff_id;
+
 
 -- 4. List each film and the number of actors who are listed for that film.
 select f.title, count(actor_id) as actors from film as f
